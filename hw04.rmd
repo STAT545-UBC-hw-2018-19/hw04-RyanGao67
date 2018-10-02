@@ -1,0 +1,31 @@
+---
+title: "STAT 545A homework 4"
+author: "Tian Gao"
+date: "2018/10/2"
+output: html_document
+---
+
+# Bring rectangular data in
+```{r}
+## load gapminder
+library(gapminder)
+## load tidyverse
+library(tidyverse)
+```
+
+# Data Reshaping Prompts (and relationship to aggregation)
+
+## Activity #1
+
+**Make your own cheatsheet similar to Tyler Rinker¡¯s minimal guide to tidyr**
+
+# Join Prompts (join, merge, look up)
+
+## Activity #1
+* Problem: You have two data sources and you need info from both in one new data object.
+
+* Solution: Perform a join, which borrows terminology from the database world, specifically SQL.
+
+* Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
+* One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city.
+* One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.
