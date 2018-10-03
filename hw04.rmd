@@ -15,10 +15,49 @@ library(tidyverse)
 
 # Data Reshaping Prompts (and relationship to aggregation)
 
-## Activity #1
+# Activity #2
 
-**Make your own cheatsheet similar to Tyler Rinker¡¯s minimal guide to tidyr**
+* Make a tibble with one row per year and columns for life expectancy for two or more countries.
+* Use knitr::kable() to make this table look pretty in your rendered homework.
+* Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+```{r}
 
+life_contrast<-gapminder %>%
+# Filter the country to China and United States
+  filter(country %in% c("China","Canada"))%>%
+  select(year, country, lifeExp) %>%
+# reshape the data, spread the country to columns, lifeExp as the values
+  spread(country,lifeExp) %>%
+  rename(Year = year)
+knitr::kable(
+  life_contrast
+)
+```
+
+```{r}
+# fix names with spaces
+ life_contrast%>% 
+  ggplot() +
+  # make a line plot with points for Australia
+  geom_line(aes(Year, China, color = "China")) +
+  geom_point(aes(Year, China, color = "China")) +
+  # make a line plot with points for New_Zealand
+  geom_line(aes(Year, Canada, color = "Canada")) +
+  geom_point(aes(Year, Canada, color = "Canada")) +
+  labs(y = "Life Expectency")
+```
+
+* Next I'll show the scatterplot that shows life expectancy for this two countries.
+```{r}
+life_contrast %>%
+  ggplot(aes(China, Canada,color=factor(Year)))+
+  geom_point()+
+  xlim(40,85)+
+  ylim(40,85)+
+  coord_fixed()+
+  geom_abline(intercept = 0, slope = 1)
+  
+```
 # Join Prompts (join, merge, look up)
 
 ## Activity #1
