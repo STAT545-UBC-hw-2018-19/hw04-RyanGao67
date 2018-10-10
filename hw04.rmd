@@ -89,3 +89,99 @@ country_codes %>%
   knitr::kable()
 ```
 
+* First I'll show full join
+
+```{r}
+fullr <- full_join(gapminder,country_codes , by = "country") 
+fullr %>% 
+  head(30)%>%
+  knitr::kable()
+```
+
+* I'll check the dimension of result
+```{r}
+dim(fullr)
+```
+
+Then Let's change the pass in order to see what will happen.
+```{r}
+fulll <- full_join(gapminder,country_codes , by = "country") 
+fulll %>% 
+  head(30)%>%
+  knitr::kable()
+
+dim(fulll)
+```
+* From the above experiment, we can see that full-join() with reversed pass in generated the same result. The reason is that full-join function shows all rows and columns from both x and y.
+
+* inner_join()
+```{r}
+inner_join(gapminder, country_codes, by = "country") %>%
+  head(30) %>%
+  knitr::kable() 
+```
+
+```{r}
+# shows the dimension of the result table
+dim(inner_join(gapminder, country_codes, by = "country"))
+```
+
+Then I'll reverse the pass in parameters to see what will happen.
+```{r}
+inner_join(country_codes, gapminder, by = "country") %>% 
+  head(30)%>%
+  knitr::kable()
+```
+
+```{r}
+dim(inner_join( country_codes, gapminder,by = "country"))
+```
+
+* From the above experiment we can see that changing the order of passing in parameters does not change the result. Because the inner_join() only find the countries appeard in both data frames.
+
+* semi_join()
+```{r}
+semi_join( gapminder, country_codes, by = "country") %>%
+  head(30)%>%
+  knitr::kable() 
+```
+
+I'll then change the order of parameters
+
+```{r}
+semi_join(country_codes, gapminder, by = "country") %>% 
+  head(30)%>%
+  knitr::kable() 
+```
+* We can see that this time the results is different. Though semi_join() returns the overlapped countries, the results depend on the first parameter. 
+
+* left_join()
+```{r}
+left_join(gapminder, country_codes, by = "country") %>%
+  head(30)%>%
+  knitr::kable() 
+```
+
+```{r}
+left_join(country_codes, gapminder, by = "country")  %>%
+  head(30) %>%
+  knitr::kable() 
+```
+
+* The results depends on the countries of the first parameter. if country_codes is the first parameter, then we can not find the countries only exist in gapminder. And for the countries only existed in country_codes, the value for that in gaominder is set to NA. 
+
+* anti_join()
+```{r}
+anti_join(x = gapminder, y = country_codes, by = "country")
+```
+```{r}
+anti_join(country_codes, gapminder, by = "country")  %>% 
+  head(30)%>%
+  knitr::kable()
+```
+
+* anti_join() shows the rows in the first parameter that does not exist in the second one. Also the columns in the result is dependent on the first parameter. 
+
+
+
+
