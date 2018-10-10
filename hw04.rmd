@@ -33,6 +33,7 @@ knitr::kable(
   life_contrast
 )
 ```
+
 * Then I'll do it for different countries, eg the countries of a continent
 ```{r}
 life_contrast_asia <- gapminder %>%
@@ -46,14 +47,15 @@ knitr::kable(
 
 ```
 
+* THen I'll draw a line plot of LifeExpectency of China and Canada
 ```{r}
 # fix names with spaces
  life_contrast%>% 
   ggplot() +
-  # make a line plot with points for Australia
+  # make a line plot with points for China
   geom_line(aes(Year, China, color = "China")) +
   geom_point(aes(Year, China, color = "China")) +
-  # make a line plot with points for New_Zealand
+  # make a line plot with points for Canada
   geom_line(aes(Year, Canada, color = "Canada")) +
   geom_point(aes(Year, Canada, color = "Canada")) +
   labs(y = "Life Expectency")
@@ -112,6 +114,7 @@ fulll %>%
 
 dim(fulll)
 ```
+
 * From the above experiment, we can see that full-join() with reversed pass in generated the same result. The reason is that full-join function shows all rows and columns from both x and y.
 
 * inner_join()
@@ -153,6 +156,7 @@ semi_join(country_codes, gapminder, by = "country") %>%
   head(30)%>%
   knitr::kable() 
 ```
+
 * We can see that this time the results is different. Though semi_join() returns the overlapped countries, the results depend on the first parameter. 
 
 * left_join()
@@ -174,6 +178,7 @@ left_join(country_codes, gapminder, by = "country")  %>%
 ```{r}
 anti_join(x = gapminder, y = country_codes, by = "country")
 ```
+
 ```{r}
 anti_join(country_codes, gapminder, by = "country")  %>% 
   head(30)%>%
