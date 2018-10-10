@@ -33,6 +33,18 @@ knitr::kable(
   life_contrast
 )
 ```
+* Then I'll do it for different countries, eg the countries of a continent
+```{r}
+life_contrast_asia <- gapminder %>%
+  filter(continent == "Asia") %>%
+  select(c("year", "country", "lifeExp")) %>%
+  spread(country, lifeExp)
+
+knitr::kable(
+  life_contrast_asia
+)
+
+```
 
 ```{r}
 # fix names with spaces
@@ -58,6 +70,7 @@ life_contrast %>%
   geom_abline(intercept = 0, slope = 1)
   
 ```
+
 # Join Prompts (join, merge, look up)
 
 ## Activity #1
@@ -68,3 +81,11 @@ life_contrast %>%
 * Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
 * One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city.
 * One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.
+
+* country_codes in package gapminder is a good data frame for this situation. First, let's show the data in country_codes 
+```{r}
+country_codes %>% 
+  head(30)%>%
+  knitr::kable()
+```
+
